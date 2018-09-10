@@ -1,0 +1,53 @@
+<li class="nav-item">
+    <a class="nav-link waves-light" mdbWavesEffect (click)="signUpModal.show()">会員加入</a>
+</li>
+
+
+<!--====================
+    Modals 加入
+==================== -->
+
+<div mdbModal #signUpModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="signUpModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">会員加入</h4>
+      </div>
+
+      <div class="modal-body">
+        <div>
+          <ul>
+            <li>
+              <label for="username">ID</label> <br>
+              <input type="text" class="textField" [(ngModel)]="userId">
+              <div *ngIf="!isIdCorrect" class="validation">{{id_err}}</div>
+            </li>
+            <li>
+              <label for="userpassword">PW</label> <br>
+              <input type="password" class="textField" [(ngModel)]="userPw">
+              <div *ngIf="!isPwCorrect" class="validation">{{pw_err}}</div>
+            </li>
+            <li>
+              <label for="userEmail">Email</label> <br>
+              <input type="email" class="textField" [(ngModel)]="userEmail">
+              <div *ngIf="!isEmailCorrect" class="validation">{{email_err}}</div>
+            </li>
+            <li>
+              <label for="userJob">ユーザーのタイプ</label> <br>
+              <input type="radio" name="userType" value="normalUser" [(ngModel)]="userType">一般ユーザー<br>
+              <input type="radio" name="userType" value="author" [(ngModel)]="userType">漫画家<br>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="signUpModal.hide();" mdbWavesEffect>キャンセル</button>
+        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="whenBtnClicked();">加入</button>
+      </div>
+    </div>
+  </div>
+</div>

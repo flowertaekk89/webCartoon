@@ -1,0 +1,76 @@
+<li class="nav-item">
+    <a class="nav-link waves-light" mdbWavesEffect (click)="uploadManga.show()">アップロード</a>
+</li>
+
+
+<!--====================
+    Modals ログイン
+==================== -->
+<div mdbModal #uploadManga="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="uploadManga.hide(); init(updateForm);">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100">アップロード</h4>
+      </div>
+
+      <!-- modal-body -->
+      <div class="modal-body">
+
+        <!-- form -->
+        <form [formGroup]="updateForm">
+          <!-- title -->
+          <div class="title">
+            <div class="md-form">
+              <input mdbInputDirective type="text" data-error="必須" data-success=" " formControlName="title" id="title" class="form-control" value="{{title}}" [(ngModel)]="title" style="border-bottom: 1px solid #ced4da; color: #495057" >
+              <label for="title">マンガ名</label>
+            </div>
+          </div>
+          <!-- /title -->
+
+          <!-- episode -->
+          <div class="episode">
+            <div class="md-form">
+              <input mdbInputDirective type="number" data-error="必須" data-success=" " formControlName="episode" id="episode" class="form-control" value="{{episode}}" [(ngModel)]="episode" style="border-bottom: 1px solid #ced4da; color: #495057" >
+              <label for="episode">エピソード(数字)</label>
+            </div>
+          </div>
+          <!-- /episode -->
+
+          <!-- subtitle -->
+          <div class="subtitle">
+            <div class="md-form">
+              <input mdbInputDirective type="text" data-error="必須" data-success=" " formControlName="subtitle" id="subtitle" class="form-control" value="{{subtitle}}" [(ngModel)]="subtitle" style="border-bottom: 1px solid #ced4da; color: #495057" >
+              <label for="subtitle">エピソードのタイトル</label>
+            </div>
+          </div>
+          <!-- /subtitle -->
+
+          <!-- cover-img -->
+          <div class="cover-img">
+            <label for="cover-img">表紙ファイル（オプション）</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <input #coverFileRef mdbInputDirective class="form-control" type="file" id="cover-img" (change)="uploadCoverFile($event)">
+          </div>
+          <!-- /cover-img -->
+
+          <!-- manga-img -->
+          <div class="manga-img">
+            <label for="manga-img">マンガファイル</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <input #mangaFileRef mdbInputDirective class="form-control" type="file" id="manga-img" (change)="uploadMangaFile($event)">
+          </div>
+          <!-- /manga-img -->
+        </form>
+        <!-- /form -->
+
+      </div>
+      <!-- /modal-body -->
+
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="uploadManga.hide(); init(updateForm);" mdbWavesEffect>キャンセル</button>
+        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="onSubmit()">アップロード</button>
+      </div>
+    </div>
+  </div>
+</div>

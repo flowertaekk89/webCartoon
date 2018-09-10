@@ -1,0 +1,37 @@
+<!--====================
+       メインNav
+==================== -->
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
+  <mdb-navbar-brand><a class="navbar-brand" href="/">マンガサービス</a></mdb-navbar-brand>
+
+    <links>
+      <ul class="navbar-nav mr-auto" >
+        <app-login-modal (loginResult)="isLogined($event)" *ngIf="!userLogined"></app-login-modal>
+        <app-sign-up-modal *ngIf="!userLogined"></app-sign-up-modal>
+        <app-user-info-update-modal *ngIf="userLogined" [loginUser]="loginUser"></app-user-info-update-modal>
+        <app-upload-manga *ngIf="loginUser.userType=='author'" (fileUploaded)="findAllManga()"></app-upload-manga>
+        <li class="nav-item" *ngIf="userLogined">
+            <a class="nav-link waves-light" mdbWavesEffect (click)="logout()">ログアウト</a>
+        </li>
+
+      </ul>
+
+      <!-- Search form -->
+      <form class="form-inline waves-light" mdbWavesEffect>
+          <div class="md-form mt-0">
+              <input class="form-control mr-sm-2" type="text" name="searchWord" placeholder="検索" value="{{searchWord}}" (keyup)="search()" [(ngModel)]="searchWord">
+          </div>
+      </form>
+      <!-- /Search form -->
+    </links>
+</mdb-navbar>
+<!--/.Navbar-->
+
+<div class="manga-screen" >
+  <ul>
+    <li class="manga-list" *ngFor="let data of mangas" [(ngModel)]="mangas" name="mangas" ngDefaultControl>
+      <app-manga [manga]="data" [userLogined]="userLogined"></app-manga>
+    </li>
+  </ul>
+</div>

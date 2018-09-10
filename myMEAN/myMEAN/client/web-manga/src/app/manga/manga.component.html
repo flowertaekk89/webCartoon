@@ -1,0 +1,37 @@
+<div class="main">
+    <img *ngIf="!userLogined" src="http://localhost:3000/imgFile?name={{manga.cover_img}}" (error)="whenError($event)" alt="マンガ表紙" name="manga" [(ngModel)]="manga" ngDefaultControl>
+    <img *ngIf="userLogined" src="http://localhost:3000/imgFile?name={{manga.cover_img}}" (error)="whenError($event)" alt="マンガ表紙" name="manga" [(ngModel)]="manga" (click)="mangaModal.show()" ngDefaultControl>
+  <h1>{{manga.title}}</h1>
+</div>
+
+<!--====================
+          Modal
+==================== -->
+
+<div mdbModal #mangaModal="mdbModal" class="modal top fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true" style="overflow: auto;">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="mangaModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h1 class="modal-title w-100" id="myModalLabel">{{manga.title}}</h1>
+      </div>
+      <div class="modal-body">
+
+        <div *ngFor="let aManga of mangas | slice:0:-1;" class="panel panel-info">
+          <div class="panel-heading" (click)="aManga.opened = !aManga.opened">
+            <h1>{{aManga.subtitle}}</h1>
+          </div>
+          <div class="panel-body" *ngIf="aManga.opened">
+            <img src="http://localhost:3000/imgFile?name={{aManga.manga_img}}" alt="manga_img"><!-- {{aManga.manga_img}} -->
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="mangaModal.hide()" mdbWavesEffect>キャンセル</button>
+      </div>
+    </div>
+  </div>
+</div>
